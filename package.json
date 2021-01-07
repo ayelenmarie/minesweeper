@@ -1,5 +1,5 @@
 {
-  "name": "minesweeper",
+  "name": "Minesweeper",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "babel-plugin-root-import": "^6.6.0",
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-navigation": "^7.8.0"

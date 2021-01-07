@@ -8,9 +8,9 @@
 
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
-import {Colors} from './src/theme/Colors';
+import {Colors} from '../theme/Colors';
 
-const App: React.FC = () => {
+const HomeScreen: React.FC = () => {
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default HomeScreen;
