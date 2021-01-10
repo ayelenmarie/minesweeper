@@ -1,47 +1,61 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
+import React, { useCallback } from 'react'
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { Colors } from '../theme/Colors'
+
+import { ThrottledTouchableOpacity } from '~/components/common/ThrottledTouchableOpacity'
+import { Navigation } from 'react-native-navigation'
+import { ScreenIds } from '~/navigation'
+import { Board } from '~/components/board/Board'
+
+export interface Props {
+    componentId: string
+}
+
+const HomeScreen: React.FC<Props> = props => {
+    const { componentId } = props
+    const handleGamePress = useCallback(() => {
+        Navigation.push(componentId, {
+            component: {
+                name: ScreenIds.GAME
+            }
+        })
+    }, [])
+
+    return (
+        <>
+            <SafeAreaView style={styles.container}>
+                <Text style={styles.sectionTitle}>MINESWEEPER</Text>
+                <ThrottledTouchableOpacity onPress={handleGamePress}>
+                    <Text>START</Text>
+                </ThrottledTouchableOpacity>
+            </SafeAreaView>
+        </>
+    )
+}
+
+/*
+ * Styles
  */
 
-import React from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
-import {Colors} from '../theme/Colors';
-
-const HomeScreen: React.FC = () => {
-  return (
-    <>
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.sectionTitle}>HELLO WORLD!</Text>
-        <Text style={styles.subtitle}>
-          This will soon be a Minesweeper game :)
-        </Text>
-      </SafeAreaView>
-    </>
-  );
-};
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.PINK,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: Colors.PINK,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
 
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.MUSTARD,
-  },
+    sectionTitle: {
+        fontSize: 24,
+        fontWeight: '600',
+        color: Colors.MUSTARD
+    },
 
-  subtitle: {
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.LIGHT_BLUE,
-  },
-});
+    subtitle: {
+        fontSize: 18,
+        fontWeight: '400',
+        color: Colors.LIGHT_BLUE
+    }
+})
 
-export default HomeScreen;
+export default HomeScreen

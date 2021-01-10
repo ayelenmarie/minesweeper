@@ -1,7 +1,20 @@
 module.exports = {
   root: true,
-  extends: ['airbnb', 'plugin:prettier/recommended', 'prettier/react'],
-  parser: 'babel-eslint',
+  extends: [
+    '@react-native-community',
+    'airbnb-typescript',
+    'prettier',
+    'prettier/@typescript-eslint',
+    'prettier/react',
+  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2020, // Allows for the parsing of modern ECMAScript features
+    sourceType: 'module', // Allows for the use of imports
+    ecmaFeatures: {
+      jsx: true, // Allows for the parsing of JSX
+    },
+  },
   env: {
     jest: true,
     browser: true,

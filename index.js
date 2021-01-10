@@ -12,8 +12,14 @@ Navigation.events().registerAppLaunchedListener(() => {
   setDefaultNavigationOptions();
   Navigation.setRoot({
     root: {
-      component: {
-        name: ScreenIds.HOME,
+      stack: {
+        children: [
+          {
+            component: {
+              name: ScreenIds.GAME,
+            },
+          },
+        ],
       },
     },
     animate: false,

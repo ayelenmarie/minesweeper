@@ -14,6 +14,7 @@ export * from './helpers';
 
 export const ScreenIds = {
   HOME: 'HOME',
+  GAME: 'GAME',
 };
 
 /**
@@ -26,6 +27,7 @@ export function init() {
   // Register screens
 
   registerScreen(ScreenIds.HOME, require('~/screens/HomeScreen').default);
+  registerScreen(ScreenIds.GAME, require('~/screens/GameScreen').default);
 }
 
 /**
