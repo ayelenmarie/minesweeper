@@ -23,12 +23,12 @@ export const Colors = Object.freeze({
     PASTEL_ORANGE_100: '#ffe5d9',
 
     // NEIGHBOURS COLORS
-    N_BLUE: '#118ab2',
-    N_GREEN: '#09d978',
+    N_BLUE: '#390099',
+    N_GREEN: '#00896c',
     N_RED: '#d62828',
     N_PURPLE: '#9b5de5',
     N_MAROON: '#4f000b',
     N_TURQUOISE: '#00b4d8',
-    N_DARK: '#0b2329',
+    N_DARK: '#000000',
     N_GREY: '#b0bdbf'
 })

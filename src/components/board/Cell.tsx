@@ -1,37 +1,67 @@
 import React, { useCallback, useState } from 'react'
-import { Text, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
+import { Text, TouchableWithoutFeedback } from 'react-native'
 import styled from 'styled-components/native'
+import { ColorByNumber } from '~/constants/neighboursColor'
+import { CellState, CellValue } from '~/types/CellTypes'
 import { Colors } from '../../theme/Colors'
 
 /*
  * Types
  */
 
-type CellProps = {
+interface CellProps {
     // width: number
     // height: number
     // col: number
     // row: number
     // onReveal: (col: number, row: number) => void
     // onExplode: () => void
+    state: CellState
+    value: CellValue
+    row: number
+    col: number
     onCellPressIn: () => void
     onCellPressOut: () => void
 }
 
-type DimensionProps = {
-    width: number
-    height: number
+type ContainerProps = {
+isRevealed: boolean
 }
 
-export const Cell: React.FC<CellProps> = ({onCellPressIn, onCellPressOut}) => {
+type NumberProps = { 
+    numberColor: string | null
+}
+
+export const Cell: React.FC<CellProps> = ({state, value, onCellPressIn, onCellPressOut}) => {
+    const isRevealed = state === CellState.revealed
+    const isFlagged = state === CellState.flagged
+    const numberColor = ColorByNumber[value]
+
+    const renderContent = (): React.ReactNode => {
+        if (isRevealed) {
+            if (value === CellValue.bomb) {
+               return <Emoji source={require('~/images/explosion.png')}/>
+            } else if (value === CellValue.none) {
+                return null
+            }
+
+            return <Number numberColor={numberColor}>{value}</Number>
+        } else if (isFlagged) {
+            return <Emoji source={require('~/images/flag.png')}/>
+        } 
+
+        return null
+    }
+
     return (
         <TouchableWithoutFeedback
         onPressIn={onCellPressIn}
         onPressOut={onCellPressOut}
         >
-            <Container />
+             <Container isRevealed={isRevealed} >
+                {renderContent()}
+                </Container>
         </TouchableWithoutFeedback>
-
     )
 }
 
@@ -39,26 +69,23 @@ export const Cell: React.FC<CellProps> = ({onCellPressIn, onCellPressOut}) => {
  * Styles
  */
 
-const Container = styled.View`
+const Container = styled.View<ContainerProps>`
     background-color: ${Colors.PINK_500};
-    border-width: 3px;
-    border-top-color: ${Colors.PINK_100};
-    border-left-color: ${Colors.PINK_100};
-    border-right-color: ${Colors.PINK_800};
-    border-bottom-color: ${Colors.PINK_800};
+    border-width: ${props => props.isRevealed ? '1px' : '3px'};
+    border-top-color: ${props => props.isRevealed ? Colors.PINK_800 : Colors.PINK_100};
+    border-left-color: ${props => props.isRevealed ? Colors.PINK_800 : Colors.PINK_100};
+    border-right-color: ${props => props.isRevealed ? Colors.PINK_800 : Colors.PINK_800};
+    border-bottom-color: ${props => props.isRevealed ? Colors.PINK_800 : Colors.PINK_800};
     width: 30;
     height: 30;
 `
 
-const RevealedContainer = styled.View<DimensionProps>`
-justify-content: center;
-align-items: center;
-    background-color: ${Colors.PINK_500};
-    width: ${props => props.width};
-    height: ${props => props.height};
+const Emoji = styled.Image`
+    width: ${30 / 2};
+    height: ${30 / 2};
 `
 
-const Mine = styled.Image<DimensionProps>`
-    width: ${props => props.width / 2};
-    height: ${props => props.height / 2};
+const Number = styled.Text<NumberProps>`
+color: ${props => props.numberColor};
+font-weight: 600;
 `

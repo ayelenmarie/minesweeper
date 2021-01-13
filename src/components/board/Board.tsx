@@ -29,7 +29,7 @@ export const Board = ({ boardSize, cellSize, onCellPressIn, onCellPressOut }: Bo
     const [cells, setCells] = useState(generateCells())
 
     const renderCells = (): React.ReactNode => {
-        return cells.map((row, rowIndex) => row.map((cell, colIndex) => <Cell key={`${rowIndex}-${colIndex}`} onCellPressIn={onCellPressIn} onCellPressOut={onCellPressOut} />))
+        return cells.map((row, rowIndex) => row.map((cell, colIndex) => <Cell key={`${rowIndex}-${colIndex}`} onCellPressIn={onCellPressIn} onCellPressOut={onCellPressOut} state={cell.state} value={cell.value} row={rowIndex} col={colIndex} />))
     }
 
     const handleReveal = useCallback((col: number, row: number) => {
