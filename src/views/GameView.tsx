@@ -8,8 +8,8 @@ import { Colors } from '../theme/Colors'
 import {BOARD_SIZE, CELL_SIZE} from '~/constants/board'
 import { EmojiButton } from '~/components/board/EmojiButton'
 import { EmojiState, EmojiType } from '~/types/EmojiTypes'
-import { generateCells } from '~/utils'
-import { CellState, CellType } from '~/types/CellTypes'
+import { generateCells, openAdjacentCells } from '~/utils'
+import { CellState, CellType, CellValue } from '~/types/CellTypes'
 import { Cell } from '~/components/board/Cell'
 
 /*
@@ -65,27 +65,50 @@ const handleEmojiPressOut = useCallback((): void => {
 
  } ,[])
 
+ /**
+  * Pressing on a cell behaviour
+  * @param rowParam 
+  * @param colParam 
+  */
+
  const handleCellPress = (rowParam: number, colParam: number) => (): void => {
 
-    // Start the game
+    // Starts the game
 if (!live) {
+    // Prevents pressing on bomb when starting game
     setLive(true)
 }
-const currentCells = cells.slice()
+
+// Makes copy of cells array to manipulate its state
+let newCells = cells.slice()
 const currentCell = cells[rowParam][colParam]
 
-if (currentCell.state === CellState.revealed) {
+/*
+* Reveals cells
+*/
+
+if (currentCell.value === CellValue.bomb) {
+    // Takes care of bomb click after game started
+} else if (currentCell.value === CellValue.none) {
+
+// Spreads none cells
+newCells = openAdjacentCells(newCells, rowParam, colParam)
+setCells(newCells)
+}
+
+// Clicking on revealed or flagged cells does nothing else
+if (currentCell.state === CellState.revealed || currentCell.state === CellState.flagged) {
     return
 } 
 else if (currentCell.state === CellState.closed) {
-currentCells[rowParam][colParam].state = CellState.revealed
-setCells(currentCells)
+newCells[rowParam][colParam].state = CellState.revealed
+setCells(newCells)
 }
 
  }
 
- // Restarting game with emoji
 
+ // Restarts game with emoji
  const handleEmojiPress = (): void => {
 if (live) {
     setLive(false)
@@ -104,19 +127,20 @@ if (live) {
          return
      }
 
-     const currentCells = cells.slice()
+// Makes copy of cells array to manipulate its state
+     const newCells = cells.slice()
      const currentCell = cells[rowParam][colParam]
 
      if (currentCell.state === CellState.revealed) {
          return
      } 
      else if (currentCell.state === CellState.closed) {
-currentCells[rowParam][colParam].state = CellState.flagged
-setCells(currentCells)
+newCells[rowParam][colParam].state = CellState.flagged
+setCells(newCells)
     setBombCounter(bombCounter - 1)
      } else if (currentCell.state === CellState.flagged) {
-        currentCells[rowParam][colParam].state = CellState.closed
-        setCells(currentCells)
+        newCells[rowParam][colParam].state = CellState.closed
+        setCells(newCells)
             setBombCounter(bombCounter + 1)
      }
  }

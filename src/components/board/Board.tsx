@@ -14,8 +14,8 @@ type BoardProps = {
     cellSize: number
     onCellPressIn: () => void
     onCellPressOut: () => void
-    onCellPress(rowParams: number, celParams: number): () => void
-    onLongCellPress(rowParams: number, celParams: number): () => void
+    onCellPress(rowParam: number, celParam: number): () => void
+    onLongCellPress(rowParam: number, celParam: number): () => void
 
 }
 
