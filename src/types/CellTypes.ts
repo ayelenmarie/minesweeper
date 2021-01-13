@@ -1,23 +1,24 @@
 export enum CellValue {
-    none,
-    one,
-    two,
-    three,
-    four,
-    five,
-    six,
-    seven,
-    eight,
-    bomb,
+  none,
+  one,
+  two,
+  three,
+  four,
+  five,
+  six,
+  seven,
+  eight,
+  bomb,
 }
 
 export enum CellState {
-    closed,
-    revealed, 
-    flagged,
+  closed,
+  revealed,
+  flagged,
 }
 
 export type CellType = {
-    value: CellValue
-    state: CellState
-}
+  value: CellValue;
+  state: CellState;
+  red?: boolean;
+};

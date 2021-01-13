@@ -1,6 +1,6 @@
 import React from 'react';
-import {Navigation} from 'react-native-navigation';
-import {ThemeProvider} from '~/theme/ThemeProvider';
+import { Navigation } from 'react-native-navigation';
+import { ThemeProvider } from '~/theme/ThemeProvider';
 
 /**
  * Helpers

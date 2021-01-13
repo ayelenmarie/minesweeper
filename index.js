@@ -1,10 +1,6 @@
-import {Navigation} from 'react-native-navigation';
+import { Navigation } from 'react-native-navigation';
 
-import {
-  init as initNavigation,
-  setDefaultNavigationOptions,
-  ScreenIds,
-} from './src/navigation';
+import { init as initNavigation, setDefaultNavigationOptions, ScreenIds } from './src/navigation';
 
 initNavigation();
 
@@ -16,7 +12,7 @@ Navigation.events().registerAppLaunchedListener(() => {
         children: [
           {
             component: {
-              name: ScreenIds.GAME,
+              name: ScreenIds.HOME,
             },
           },
         ],

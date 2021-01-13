@@ -6,5 +6,5 @@ export enum EmojiType {
 }
 
 export type EmojiState = {
-  pressed: boolean
-}
+  pressed: boolean;
+};

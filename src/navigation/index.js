@@ -1,9 +1,9 @@
-import {Navigation} from 'react-native-navigation';
-import {Platform} from 'react-native';
+import { Navigation } from 'react-native-navigation';
+import { Platform } from 'react-native';
 
-import {Colors} from '~/theme/Colors';
-import {WINDOW_WIDTH} from '~/styles/helpers';
-import {registerScreen} from './helpers';
+import { Colors } from '~/theme/Colors';
+import { WINDOW_WIDTH } from '~/styles/helpers';
+import { registerScreen } from './helpers';
 
 export * from './helpers';
 

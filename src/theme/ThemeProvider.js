@@ -1,20 +1,18 @@
-import React, {useState, useContext, createContext} from 'react';
+import React, { useState, useContext, createContext } from 'react';
 import PropTypes from 'prop-types';
-import {ThemeProvider as StyledThemeProvider} from 'styled-components/native';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components/native';
 
-import {themes} from '~/theme/theme';
+import { themes } from '~/theme/theme';
 
-const ThemeContext = createContext({theme: 'light', setTheme: () => {}});
-export const ThemeProvider = ({children}) => {
+const ThemeContext = createContext({ theme: 'light', setTheme: () => {} });
+export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState('light');
 
-  const value = {theme, setTheme};
+  const value = { theme, setTheme };
 
   return (
     <ThemeContext.Provider value={value}>
-      <StyledThemeProvider theme={themes[theme]}>
-        {children}
-      </StyledThemeProvider>
+      <StyledThemeProvider theme={themes[theme]}>{children}</StyledThemeProvider>
     </ThemeContext.Provider>
   );
 };

@@ -1,4 +1,4 @@
-import {Colors} from './Colors';
+import { Colors } from './Colors';
 
 export const dark = {
   primary: Colors.MUSK_GREEN,
