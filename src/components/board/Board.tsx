@@ -1,23 +1,21 @@
-import React, { useCallback, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components/native'
 
-import { Colors } from '../../theme/Colors'
-import BOARD_SIZE from '~/screens/GameScreen'
-import CELL_SIZE from '~/screens/GameScreen'
 import { Cell } from '~/components/board/Cell'
-import { times } from 'lodash'
-import {generateCells} from '~/utils/index'
-import { EmojiType } from '~/types/EmojiTypes'
+import { CellType } from '~/types/CellTypes'
 
 /*
  * Types
  */
 
 type BoardProps = {
+    cells: CellType[][]
     boardSize: number
     cellSize: number
     onCellPressIn: () => void
     onCellPressOut: () => void
+    onCellPress(rowParams: number, celParams: number): () => void
+    onLongCellPress(rowParams: number, celParams: number): () => void
 
 }
 
@@ -25,22 +23,10 @@ type ContainerProps = {
     boardSize: number
 }
 
-export const Board = ({ boardSize, cellSize, onCellPressIn, onCellPressOut }: BoardProps) => {
-    const [cells, setCells] = useState(generateCells())
-
+export const Board = ({ cells, boardSize, cellSize, onCellPress, onCellPressIn, onCellPressOut, onLongCellPress }: BoardProps) => {
     const renderCells = (): React.ReactNode => {
-        return cells.map((row, rowIndex) => row.map((cell, colIndex) => <Cell key={`${rowIndex}-${colIndex}`} onCellPressIn={onCellPressIn} onCellPressOut={onCellPressOut} state={cell.state} value={cell.value} row={rowIndex} col={colIndex} />))
+        return cells.map((row, rowIndex) => row.map((cell, colIndex) => <Cell key={`${rowIndex}-${colIndex}`} onCellPressIn={onCellPressIn} onCellPressOut={onCellPressOut} state={cell.state} value={cell.value} row={rowIndex} col={colIndex} onCellPress={onCellPress} onLongCellPress={onLongCellPress} />))
     }
-
-    const handleReveal = useCallback((col: number, row: number) => {
-        // aca va a ir la logica de limpiar los neighbours
-        console.warn('REVEAL GENERAL')
-    }, [])
-
-    const handleExplode = useCallback(() => {
-        // aca va a ir la logica de cuando explota una celda y se termina el juego
-        console.warn('REVEAL GENERAL')
-    }, [])
 
     const boardWidth = cellSize * boardSize
 

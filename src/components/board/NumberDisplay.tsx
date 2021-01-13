@@ -7,9 +7,12 @@ interface NumberDisplayProps {
 }
 
 export const NumberDisplay: React.FC<NumberDisplayProps> = ({value}) => {
+    const formattedValue = value.toString().padStart(3, '0')
+    const negativeFormattedValue = Math.abs(value).toString().padStart(2, '0')
+
     return (
         <Container>
-            <Number>{value.toString().padStart(3, '0')}</Number>
+            <Number>{value < 0 ? `-${negativeFormattedValue}` : formattedValue}</Number>
         </Container>
     )
 }

@@ -9,15 +9,16 @@ interface EmojiButtonProps {
     pressed: boolean
     onPressIn: () => void
     onPressOut: () => void
+    onPress: () => void
 }
 
 interface ContainerProps {
     pressed: boolean
 }
 
-export const EmojiButton: React.FC<EmojiButtonProps> = ({emoji, pressed, onPressIn, onPressOut}) => {
+export const EmojiButton: React.FC<EmojiButtonProps> = ({emoji, pressed, onPress, onPressIn, onPressOut}) => {
     return (
-        <TouchableWithoutFeedback onPressIn={onPressIn} onPressOut={onPressOut}>
+        <TouchableWithoutFeedback onPress={onPress} onPressIn={onPressIn} onPressOut={onPressOut}>
             <Container pressed={pressed}>
             <Emoji>{emoji}</Emoji>
             </Container>

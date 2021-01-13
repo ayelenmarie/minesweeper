@@ -22,6 +22,8 @@ interface CellProps {
     col: number
     onCellPressIn: () => void
     onCellPressOut: () => void
+    onCellPress(rowParam: number, colParam: number):  () => void
+    onLongCellPress(rowParam: number, colParam: number):  () => void
 }
 
 type ContainerProps = {
@@ -32,7 +34,7 @@ type NumberProps = {
     numberColor: string | null
 }
 
-export const Cell: React.FC<CellProps> = ({state, value, onCellPressIn, onCellPressOut}) => {
+export const Cell: React.FC<CellProps> = ({state, value, row, col, onCellPress, onCellPressIn, onCellPressOut, onLongCellPress}) => {
     const isRevealed = state === CellState.revealed
     const isFlagged = state === CellState.flagged
     const numberColor = ColorByNumber[value]
@@ -57,6 +59,8 @@ export const Cell: React.FC<CellProps> = ({state, value, onCellPressIn, onCellPr
         <TouchableWithoutFeedback
         onPressIn={onCellPressIn}
         onPressOut={onCellPressOut}
+        onPress={onCellPress(row, col)}
+        onLongPress={onLongCellPress(row,col)}
         >
              <Container isRevealed={isRevealed} >
                 {renderContent()}
@@ -78,6 +82,8 @@ const Container = styled.View<ContainerProps>`
     border-bottom-color: ${props => props.isRevealed ? Colors.PINK_800 : Colors.PINK_800};
     width: 30;
     height: 30;
+    justify-content: center;
+    align-items: center;
 `
 
 const Emoji = styled.Image`
