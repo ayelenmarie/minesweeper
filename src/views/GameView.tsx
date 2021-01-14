@@ -47,7 +47,6 @@ export const GameView: React.FC<GameProps> = ({
   const [gameWon, setGameWon] = useState<boolean>(false);
 
   const gameDifficulty = GameByType[gameType];
-  console.warn(gameDifficulty);
 
   // Starts the game (if not started)
   useEffect(() => {

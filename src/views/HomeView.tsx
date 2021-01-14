@@ -18,17 +18,17 @@ export const HomeView: React.FC<HomeProps> = ({ onEasyPress, onMediumPress, onHa
       <Subtitle>SELECT GAME DIFFICULTY</Subtitle>
       <Spacer />
       <TouchableWithoutFeedback onPress={onEasyPress}>
-        <ButtonText>EASY</ButtonText>
+        <ButtonText>EASY 🙂</ButtonText>
       </TouchableWithoutFeedback>
       <Spacer />
 
       <TouchableWithoutFeedback onPress={onMediumPress}>
-        <ButtonText>MEDIUM</ButtonText>
+        <ButtonText>MEDIUM 🤪</ButtonText>
       </TouchableWithoutFeedback>
       <Spacer />
 
       <TouchableWithoutFeedback onPress={onHardPress}>
-        <ButtonText>HARD</ButtonText>
+        <ButtonText>HARD ☠️</ButtonText>
       </TouchableWithoutFeedback>
     </Container>
   );
