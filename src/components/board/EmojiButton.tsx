@@ -42,7 +42,7 @@ const Container = styled.View<ContainerProps>`
   margin: 10px;
   justify-content: center;
   align-items: center;
-  background-color: ${Colors.PURPLE};
+  background-color: ${Colors.PINK_600};
 
   /* Change borders to simulate pressed button */
   border-top-color: ${(props) => (props.pressed ? Colors.PINK_800 : Colors.PINK_100)};

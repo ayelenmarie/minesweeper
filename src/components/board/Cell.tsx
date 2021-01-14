@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from 'react';
-import { Image, TouchableWithoutFeedback } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { ColorByNumber } from '~/constants/neighboursColor';
 import { CellState, CellValue } from '~/types/CellTypes';
@@ -55,7 +56,7 @@ export const Cell: React.FC<CellProps> = ({
 
       return <Number numberColor={numberColor}>{value}</Number>;
     } else if (isFlagged) {
-      return <Image source={require('~/images/flag.png')} />;
+      return <Emoji source={require('~/images/flag.png')} />;
     }
 
     return null;

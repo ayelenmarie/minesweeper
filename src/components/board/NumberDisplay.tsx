@@ -23,7 +23,7 @@ export const NumberDisplay: React.FC<NumberDisplayProps> = ({ value }) => {
 
 const Container = styled.View`
   margin: 10px;
-  background-color: ${Colors.PURPLE};
+  background-color: ${Colors.PINK};
   border-width: 3px;
   border-top-color: ${Colors.PINK_100};
   border-left-color: ${Colors.PINK_100};
@@ -36,6 +36,6 @@ const Container = styled.View`
 `;
 
 const Number = styled.Text`
-  color: ${Colors.PINK_600};
+  color: ${Colors.PINK_100};
   font-weight: 800;
 `;

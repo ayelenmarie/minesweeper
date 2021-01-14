@@ -1,10 +1,9 @@
 import React, { useCallback } from 'react';
-import { SafeAreaView, StyleSheet, Text } from 'react-native';
-import { Colors } from '../theme/Colors';
 
-import { ThrottledTouchableOpacity } from '~/components/common/ThrottledTouchableOpacity';
 import { Navigation } from 'react-native-navigation';
 import { ScreenIds } from '~/navigation';
+import { GameType } from '~/types/GameTypes';
+import { HomeView } from '~/views/HomeView';
 
 export interface HomeProps {
   componentId: string;
@@ -14,11 +13,25 @@ interface PushedProps {
   bombs: number;
   maxRows: number;
   maxCols: number;
+  gameType: GameType;
 }
 
-const HomeScreen: React.FC<HomeProps> = (props) => {
-  const { componentId } = props;
-  const handleGamePress = useCallback(() => {
+const HomeScreen: React.FC<HomeProps> = ({ componentId }) => {
+  const handleEasyPress = useCallback(() => {
+    return Navigation.push<PushedProps>(componentId, {
+      component: {
+        name: ScreenIds.GAME,
+        passProps: {
+          bombs: 5,
+          maxRows: 10,
+          maxCols: 10,
+          gameType: GameType.easy,
+        },
+      },
+    });
+  }, []);
+
+  const handleMediumPress = useCallback(() => {
     return Navigation.push<PushedProps>(componentId, {
       component: {
         name: ScreenIds.GAME,
@@ -26,46 +39,33 @@ const HomeScreen: React.FC<HomeProps> = (props) => {
           bombs: 10,
           maxRows: 10,
           maxCols: 10,
+          gameType: GameType.medium,
+        },
+      },
+    });
+  }, []);
+
+  const handleHardPress = useCallback(() => {
+    return Navigation.push<PushedProps>(componentId, {
+      component: {
+        name: ScreenIds.GAME,
+        passProps: {
+          bombs: 25,
+          maxRows: 12,
+          maxCols: 12,
+          gameType: GameType.hard,
         },
       },
     });
   }, []);
 
   return (
-    <>
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.sectionTitle}>MINESWEEPER</Text>
-        <ThrottledTouchableOpacity onPress={handleGamePress}>
-          <Text>START</Text>
-        </ThrottledTouchableOpacity>
-      </SafeAreaView>
-    </>
+    <HomeView
+      onEasyPress={handleEasyPress}
+      onMediumPress={handleMediumPress}
+      onHardPress={handleHardPress}
+    />
   );
 };
-
-/*
- * Styles
- */
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.PINK,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.MUSTARD,
-  },
-
-  subtitle: {
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.LIGHT_BLUE,
-  },
-});
 
 export default HomeScreen;

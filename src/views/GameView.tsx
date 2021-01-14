@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { useCallback, useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 import styled from 'styled-components/native';
@@ -10,6 +11,8 @@ import { EmojiButton } from '~/components/board/EmojiButton';
 import { EmojiType } from '~/types/EmojiTypes';
 import { generateCells, openAdjacentCells } from '~/utils';
 import { CellState, CellType, CellValue } from '~/types/CellTypes';
+import { GameType } from '~/types/GameTypes';
+import { GameByType } from '~/constants/GameTypes';
 
 /*
  * Types
@@ -19,6 +22,7 @@ type GameProps = {
   bombs: number;
   maxRows: number;
   maxCols: number;
+  gameType: GameType;
   onBackPress: () => void;
 };
 
@@ -26,7 +30,13 @@ type CounterHeaderProps = {
   maxRows: number;
 };
 
-export const GameView: React.FC<GameProps> = ({ bombs, maxRows, maxCols, onBackPress }) => {
+export const GameView: React.FC<GameProps> = ({
+  bombs,
+  maxRows,
+  maxCols,
+  gameType,
+  onBackPress,
+}) => {
   const [cells, setCells] = useState<CellType[][]>(generateCells(bombs, maxRows, maxCols));
   const [emoji, setEmoji] = useState<EmojiType>(EmojiType.smile);
   const [emojiPressed, setEmojiPressed] = useState(false);
@@ -35,6 +45,9 @@ export const GameView: React.FC<GameProps> = ({ bombs, maxRows, maxCols, onBackP
   const [bombCounter, setBombCounter] = useState<number>(bombs);
   const [gameOver, setGameOver] = useState<boolean>(false);
   const [gameWon, setGameWon] = useState<boolean>(false);
+
+  const gameDifficulty = GameByType[gameType];
+  console.warn(gameDifficulty);
 
   // Starts the game (if not started)
   useEffect(() => {
@@ -223,7 +236,8 @@ export const GameView: React.FC<GameProps> = ({ bombs, maxRows, maxCols, onBackP
         </BackButtonContainer>
       </NavigationHeaderContainer>
       <ContentContainer>
-        <SectionTitle>MINESWEEPER</SectionTitle>
+        <SectionTitle>{`${gameDifficulty} GAME`}</SectionTitle>
+        <Spacer />
         <CounterHeaderContainer maxRows={maxRows}>
           <NumberDisplay value={bombCounter} />
           <EmojiButton
@@ -257,7 +271,7 @@ export const GameView: React.FC<GameProps> = ({ bombs, maxRows, maxCols, onBackP
 
 const Container = styled.View`
   flex: 1;
-  background-color: ${Colors.PINK};
+  background-color: ${Colors.PINK_500};
 `;
 
 const ContentContainer = styled.View`
@@ -286,7 +300,7 @@ const Icon = styled.Image`
 const SectionTitle = styled.Text`
   font-size: 24px;
   font-weight: 600;
-  color: ${Colors.MUSTARD};
+  color: ${Colors.MUSK_GREEN};
 `;
 
 const Spacer = styled.View`
