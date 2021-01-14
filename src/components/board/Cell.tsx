@@ -96,8 +96,8 @@ const Container = styled.View<ContainerProps>`
 `;
 
 const Emoji = styled.Image`
-  width: ${30 / 2}px;
-  height: ${30 / 2}px;
+  width: 15px;
+  height: 15px;
 `;
 
 const Number = styled.Text<NumberProps>`
