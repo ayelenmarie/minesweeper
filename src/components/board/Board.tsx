@@ -71,7 +71,6 @@ export const Board: React.FC<BoardProps> = ({
 const Container = styled(View)<ContainerProps>`
   flex-direction: row;
   flex-wrap: wrap;
-  width: ${(props) => props.boardWidth};
-  height: ${(props) => props.boardHeight};
-  background-color: red;
+  width: ${(props) => props.boardWidth}px;
+  height: ${(props) => props.boardHeight}px;
 `;

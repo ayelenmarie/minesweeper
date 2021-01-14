@@ -49,7 +49,10 @@ export const Cell: React.FC<CellProps> = ({
   const renderContent = (): React.ReactNode => {
     if (isRevealed) {
       if (value === CellValue.bomb) {
-        return <Emoji source={require('~/images/explosion.png')} />;
+        if (isRed) {
+          return <Emoji source={require('~/images/explosion.png')} />;
+        }
+        return <Emoji source={require('~/images/bomb.png')} />;
       } else if (value === CellValue.none) {
         return null;
       }
@@ -86,8 +89,8 @@ const Container = styled.View<ContainerProps>`
   border-left-color: ${(props) => (props.isRevealed ? Colors.PINK_800 : Colors.PINK_100)};
   border-right-color: ${(props) => (props.isRevealed ? Colors.PINK_800 : Colors.PINK_800)};
   border-bottom-color: ${(props) => (props.isRevealed ? Colors.PINK_800 : Colors.PINK_800)};
-  width: 30;
-  height: 30;
+  width: 30px;
+  height: 30px;
   justify-content: center;
   align-items: center;
 `;

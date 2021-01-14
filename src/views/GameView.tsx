@@ -259,6 +259,9 @@ export const GameView: React.FC<GameProps> = ({
           onCellPressOut={handleCellPressOut}
           onLongCellPress={handleLongCellPress}
         />
+        <Spacer />
+        {gameOver && <SectionTitle>YOU LOST 😭</SectionTitle>}
+        {gameWon && <SectionTitle>YOU WIN 💯</SectionTitle>}
       </ContentContainer>
     </Container>
   );

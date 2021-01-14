@@ -29,8 +29,8 @@ const Container = styled.View`
   border-left-color: ${Colors.PINK_100};
   border-right-color: ${Colors.PINK_800};
   border-bottom-color: ${Colors.PINK_800};
-  width: 60;
-  height: 40;
+  width: 60px;
+  height: 40px;
   justify-content: center;
   align-items: center;
 `;

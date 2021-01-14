@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { Colors } from '~/theme/Colors';
-import { EmojiState, EmojiType } from '~/types/EmojiTypes';
+import { EmojiType } from '~/types/EmojiTypes';
 
 interface EmojiButtonProps {
   emoji: EmojiType;
@@ -37,8 +37,8 @@ export const EmojiButton: React.FC<EmojiButtonProps> = ({
  */
 
 const Container = styled.View<ContainerProps>`
-  width: 60;
-  height: 40;
+  width: 60px;
+  height: 40px;
   margin: 10px;
   justify-content: center;
   align-items: center;
@@ -53,5 +53,5 @@ const Container = styled.View<ContainerProps>`
 `;
 
 const Emoji = styled.Text`
-  font-size: 20;
+  font-size: 20px;
 `;
