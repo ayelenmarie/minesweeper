@@ -50,4 +50,4 @@ $ yarn ios
 $ yarn android
 ```
 
-Made by [Ayelen Guini](https://www.linkedin.com/in/ayelenmarie/) with 💛  and 😸!
+Made by [Ayelen Guini](https://www.linkedin.com/in/ayelenmarie/) with 💛 and 😸!
